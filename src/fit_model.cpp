@@ -1,7 +1,7 @@
 /*    Isolation forests and variations thereof, with adjustments for incorporation
 *     of categorical variables and missing values.
 *     Writen for C++11 standard and aimed at being used in R and Python.
-*     
+*
 *     This library is based on the following works:
 *     [1] Liu, Fei Tony, Kai Ming Ting, and Zhi-Hua Zhou.
 *         "Isolation forest."
@@ -20,7 +20,7 @@
 *     [7] Quinlan, J. Ross. C4. 5: programs for machine learning. Elsevier, 2014.
 *     [8] Cortes, David. "Distance approximation using Isolation Forests." arXiv preprint arXiv:1910.12362 (2019).
 *     [9] Cortes, David. "Imputing missing values with unsupervised random trees." arXiv preprint arXiv:1911.06646 (2019).
-* 
+*
 *     BSD 2-Clause License
 *     Copyright (c) 2019, David Cortes
 *     All rights reserved.
@@ -47,7 +47,7 @@
 bool interrupt_switch;
 
 /*  Fit Isolation Forest model, or variant of it such as SCiForest
-* 
+*
 * Parameters:
 * ===========
 * - model_outputs (out)
@@ -291,7 +291,7 @@ bool interrupt_switch;
 *       Number of parallel threads to use. Note that, the more threads, the more memory will be
 *       allocated, even if the thread does not end up being used. Ignored when not building with
 *       OpenMP support.
-* 
+*
 * Returns
 * =======
 * Will return macro 'EXIT_SUCCESS' (typically =0) upon completion.
@@ -300,7 +300,7 @@ bool interrupt_switch;
 * what these values correspond to, you can use the functions
 * 'return_EXIT_SUCESS' and 'return_EXIT_FAILURE', which will return them
 * as integers.
-* 
+*
 * References
 * ==========
 * [1] Liu, Fei Tony, Kai Ming Ting, and Zhi-Hua Zhou.
@@ -469,9 +469,9 @@ int fit_iforest(IsoForest *model_outputs, ExtIsoForest *model_outputs_ext,
             model_outputs_ext->hplanes[tree].shrink_to_fit();
 
         #if !defined(_WIN32) && !defined(_WIN64) && !defined(_MSC_VER)
-        sigaction(SIGINT, &sig_handle, NULL);
+        // sigaction(SIGINT, &sig_handle, NULL);
         #else
-        signal(SIGINT, set_interrup_global_variable);
+        // signal(SIGINT, set_interrup_global_variable);
         #endif
     }
 
@@ -556,7 +556,7 @@ int fit_iforest(IsoForest *model_outputs, ExtIsoForest *model_outputs_ext,
 
 
 /* Add additional trees to already-fitted isolation forest model
-* 
+*
 * Parameters
 * ==========
 * - model_outputs
@@ -1012,7 +1012,7 @@ void fit_itree(std::vector<IsoTree>    *tree_root,
         if (
             model_params.cat_split_type == SubSet &&
             (
-                model_params.prob_pick_by_gain_avg  || 
+                model_params.prob_pick_by_gain_avg  ||
                 model_params.prob_pick_by_gain_pl
             )
            )
